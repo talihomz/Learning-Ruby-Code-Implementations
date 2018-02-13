@@ -19,12 +19,22 @@ class Dungeon
 
   def go(direction)
     puts "You go #{direction.to_s}"
+
     @player.location = find_room_in_direction(direction)
     show_current_description
   end
 
   def show_current_description
-    puts find_room_in_dungeon(@player.location).full_description
+    begin
+      puts find_room_in_dungeon(@player.location).full_description
+    rescue => e
+      if (e.class == NoMethodError)
+        puts "No room there bro."
+      else
+        puts "Error describing specified room"
+      end
+
+    end
   end
 
   def find_room_in_dungeon(reference)
@@ -64,14 +74,17 @@ my_dungeon = Dungeon.new "Kevin Wahome"
 my_dungeon.add_room(:largecave, "Large Cave", "a large cavernous cave", { :west => :smallcave })
 my_dungeon.add_room(:smallcave, "Small Cave", "a small, claustrophobic cave", { :east => :largecave })
 
+#start dungeon
 my_dungeon.start(:largecave)
-
 pp my_dungeon
 
+#go west
 my_dungeon.go(:west)
-
 pp my_dungeon
 
+#go east
 my_dungeon.go(:east)
-
 pp my_dungeon
+
+#go to unknown direction
+my_dungeon.go(:north)

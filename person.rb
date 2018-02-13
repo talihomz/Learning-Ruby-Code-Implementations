@@ -6,5 +6,4 @@ class Person
     @gender = gender
     @age = age
   end
-
 end
