@@ -6,6 +6,10 @@ class Dungeon
     @rooms = []
   end
 
+  def addRoom(reference, name, description, connections)
+    @rooms << Room.new(reference, name, description, connections)
+  end
+
   class Player
     attr_accessor :name, :location
 
