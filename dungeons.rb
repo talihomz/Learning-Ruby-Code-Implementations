@@ -1,3 +1,5 @@
+require 'pp'
+
 class Dungeon
   attr_accessor :player
 
@@ -6,7 +8,7 @@ class Dungeon
     @rooms = []
   end
 
-  def addRoom(reference, name, description, connections)
+  def add_room(reference, name, description, connections)
     @rooms << Room.new(reference, name, description, connections)
   end
 
@@ -32,4 +34,7 @@ end
 
 my_dungeon = Dungeon.new "Kevin Wahome"
 
-puts my_dungeon.player.name
+my_dungeon.add_room(:largecave, "Large Cave", "a large cavernous cave", { :west => :smallcave })
+my_dungeon.add_room(:smallcave, "Small Cave", "a small, claustrophobic cave", { :east => :largecave })
+
+pp my_dungeon
